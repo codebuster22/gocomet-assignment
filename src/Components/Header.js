@@ -3,72 +3,17 @@ import {Button, Modal} from "react-bootstrap";
 
 // Header.Js renders the Header for the Container.
 
-// Fake Product Data passed :-
 
-const fake1 = {
-    id: 1,
-    productName: "Sunny Sweatshirt",
-    category: "Women Top Wear",
-    color: "Peach",
-    size: "S",
-    price: "Rs. 499",
-    productImage: "https://source.unsplash.com/pONwcn4IcVU/"
-}
-
-const fake2 = {
-    id: 2,
-    productName: "Blue Shorts",
-    category: "Women Bottom Wear",
-    color: "Blue",
-    size: "S",
-    price: "Rs. 899",
-    productImage: "https://source.unsplash.com/pONwcn4IcVU/"
-}
-
-const cart = [{
-        id: 1,
-        product: fake1,
-        qty: 1
-    },
-    {
-        id: 2,
-        product: fake2,
-        qty: 3
-    }
-];
-
-const inc = (id) => {
-    cart[id-1].qty+=1;
-    console.log(cart);
-}
-
-const dec = (id) => {
-    cart[id-1].qty-=1;
-}
-
-const remove = (id) => {
-    console.log(cart,id)
-    cart.splice(id-1);
-    console.log(cart)
-}
-
-const clearAll = () => {
-    console.log("Before", cart);
-    cart.length = 0;
-    console.log("After", cart);
-}
-
-
-export default function Header() {
+export default function Header({cart, clearCart, decCartItem, incCartItem, removeCartItem}) {
 
     const [showCart, setShowCart] = useState(false);
 
     return (
-        <div className={"Header container d-flex flex-wrap align-items-center pt-3 pb-3 pl-0 pr-0"}>
+        <div className={"Header container d-flex flex-wrap align-items-center justify-content-between pt-3 pb-3 pl-0 pr-0"}>
 
             {/* Currency Selector */}
-            <div className={"col-4 d-flex p-0"}>
-                <select name="Currency" defaultValue={"USD"} className={"no-border"}>
+            <div className={"col-2 col-md-4 d-flex p-0"}>
+                <select name="Currency" defaultValue={"INR"} className={"no-border"}>
                     <option value="USD" >USD</option>
                     <option value="EUR">EUR</option>
                     <option value="GBP">GBP</option>
@@ -94,10 +39,10 @@ export default function Header() {
 
             {/* Cart Modal */}
             <CartModal items={cart}
-                       inc={inc}
-                       dec={dec}
-                       remove={remove}
-                       clearAll={clearAll}
+                       inc={incCartItem}
+                       dec={decCartItem}
+                       remove={removeCartItem}
+                       clearall={clearCart}
                        show={showCart}
                        onHide={()=>setShowCart(false)}
             />
@@ -111,18 +56,32 @@ function CartModal (props) {
 
     // Renders all the items inside cart using CartItem component
     const renderItems = (items) => {
-        return items.map(item=>{
-            return (
-                <CartItem product={item.product}
-                          key={item.id}
-                          id={item.id}
-                          qty={item.qty}
-                          inc={props.inc}
-                          dec={props.dec}
-                          remove={props.remove}
-                />
-            )
-        })
+        try{
+            if(items.length){
+                return items.map(item=>{
+                    return (
+                        <CartItem product={item}
+                                  key={item.id}
+                                  id={item.id}
+                                  inc={props.inc}
+                                  dec={props.dec}
+                                  remove={props.remove}
+                        />
+                    )
+                })
+            }else {
+                return (
+                    <tr>
+                        <td>
+                            Empty Cart
+                        </td>
+                    </tr>
+                )
+            }
+        }catch (e) {
+            console.log(e);
+            return <h2>Cart is Empty</h2>
+        }
     }
 
     return (
@@ -146,7 +105,7 @@ function CartModal (props) {
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <p className={"hover-text-danger hover-underline pointer link-danger mr-2 fs-14 "} onClick={clearAll}>Clear All</p>
+                <p className={"hover-text-danger hover-underline pointer link-danger mr-2 fs-14 "} onClick={props.clearall}>Clear All</p>
                 <Button onClick={props.onHide}>Checkout</Button>
             </Modal.Footer>
         </Modal>
@@ -188,34 +147,35 @@ function CartTable (props) {
 // Component where directly pass the data as props, it will render items accordingly
 function CartItem (props) {
 
-    const {product, qty, id, inc, dec, remove} = props;
+    const {product, id, inc, dec, remove} = props;
+    const { image, productName, category, color, size, qty, price } = product;
 
     return (
 
         <tr>
             <td>
-                <div className={"cart-product-description d-flex"}>
-                    <img src={product.productImage} className={"cart-product-image"}/>
-                    <div className={""}>
-                        <h5 className={"pointer"}>{product.productName}</h5>
-                        <p className={"m-0 hover-underline pointer"}>{product.category}</p>
-                        <p className={"m-0"}>Color:-{product.color}</p>
-                        <p className={"m-0"}>Size:-{product.size}</p>
+                <div className={"cart-product-description d-flex mt-3"}>
+                    <img src={image} className={"cart-product-image"}/>
+                    <div className={"ml-2"}>
+                        <h5 className={"pointer"}>{productName}</h5>
+                        <p className={"m-0 hover-underline pointer"}>{category}</p>
+                        <p className={"m-0"}>Color:-{color}</p>
+                        <p className={"m-0"}>Size:-{size}</p>
                     </div>
                 </div>
             </td>
             <td className={"tc align-items-between"}>
-                <div >
-                    <button onClick={()=>dec(id)}>-</button>
-                    <span>{qty}</span>
-                    <button onClick={()=>inc(id)}>+</button>
+                <div className={"d-flex justify-content-center align-items-center"}>
+                    <button className={"dec-btn btn btn-danger"} onClick={()=>dec(id)}>-</button>
+                    <p className={"value-holder m-0"}>{qty}</p>
+                    <button className={"inc-btn btn btn-primary"} onClick={()=>inc(id)}>+</button>
                 </div>
                 <div >
-                    <p className={"hover-underline hover-text-danger link-danger m-0"} onClick={()=>remove(id)}>Remove</p>
+                    <p className={"hover-underline hover-text-danger pointer link-danger m-0"} onClick={()=>remove(id)}>Remove</p>
                 </div>
             </td>
             <td className={"tr"}>
-                {product.price}
+                Rs. {price}
             </td>
         </tr>
 

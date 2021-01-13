@@ -38,6 +38,10 @@ code {
   color: #7B97A5;
 }
 
+.bg-white{
+  background-color: white;
+}
+
 .underline{
   text-decoration: underline;
 }
@@ -79,8 +83,16 @@ code {
   text-align: end;
 }
 
+.fs-12{
+  font-size: 12px;
+}
+
 .fs-14{
   font-size: 14px;
+}
+
+.fs-16{
+  font-size: 16px;
 }
 
 .pointer{
@@ -109,11 +121,22 @@ code {
 }
 
 .modal-50w{
-  min-width: 60%;
+  min-width: 50%;
 }
 
 .cart-product-image{
   max-width: 100px;
+  padding: 3px
+}
+
+.dec-btn{
+}
+
+.inc-btn{
+}
+
+.value-holder{
+  width: 40px;
 }
 
 .cart-product-description{
@@ -143,9 +166,21 @@ code {
   float: right;
 }
 
+.hide{
+  display: none;
+  transition: all 500ms ease;
+}
+
+.md-nav-links{
+  text-align: left;
+  transition: all 500ms ease;
+}
+
 .NavBar {
   width: 100%;
   padding: 10px;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid rgba(0,0,0,0.1);;
 }
 
 .nav-links {
@@ -216,4 +251,55 @@ code {
 .inactive-thumb:hover{
   transform: scale(1.1);
   transition: all 500ms ease;
+}
+
+.qty-container{
+  width: 80px !important;
+}
+
+.add-to-cart{
+  color: white !important;
+  background-color: black !important;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.add-to-wish{
+  background-color: transparent;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+.btn-60w{
+  height: 60px;
+}
+
+.vr{
+  border-left: 1px solid rgba(0,0,0,0.2);
+}
+
+.color-review{
+  color: #FDCC0D;
+}
+
+.bg-facebook{
+  background-color: #5978CF;
+}
+
+.bg-twitter{
+  background-color: #E5E5E5;
+}
+
+.bg-pinterest{
+  background-color: #FBFCFC;
+}
+
+.facebook-color{
+  color: white;
+}
+
+.twitter-color{
+  color: #1DADEB;
+}
+
+.pinterest-color{
+  color: #CD424C;
 }
