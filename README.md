@@ -10,8 +10,5 @@
 6. Clear selection should clear everything
 7. Add to cart should update the cart and when you click on cart(its in navbar) it should show a popup/modal showing all of your cart item
 
-### Library used:-
-1. ReactJs
-
-### Framework used:-
-1. React-Bootstrap
+### Demo:-
+https://codebuster22.github.io/gocomet-assignment/
