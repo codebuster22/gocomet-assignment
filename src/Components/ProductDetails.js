@@ -42,7 +42,7 @@ export default function ProductDetails ({product, color, size, qty,  handleChang
             <div className={"row"}>
 
                 {/* Product Images with Thumbnails */}
-                <div className={"product-gallery col-12 col-md-6"}>
+                <div className={"product-gallery col-12 col-md-6 mb-3"}>
                     <div className={"product-view"}>
                         <img className={"product-image"} src={product.images[currThumb]} alt={"product"}/>
                     </div>

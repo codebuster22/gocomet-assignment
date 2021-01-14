@@ -1,5 +1,10 @@
 import React, {Component} from "react";
 
+import image1 from './Assets/image1.webp';
+import image2 from './Assets/image2.webp';
+import image3 from './Assets/image3.webp';
+import image4 from './Assets/image4.webp';
+
 // Importing Components
 import Header from "./Components/Header";
 import Nav from "./Components/Nav";
@@ -15,14 +20,14 @@ class App extends Component {
             qty: 0,
             product: {
                 productId: 4657,
-                category: "Woman",
-                productName: "The Atelier Tailored Coat",
+                category: "Men T-Shirts",
+                productName: "Dry-Fit Jersey",
                 price: 499,
                 colors: [
                     "Red",
                     "Blue",
                     "Green",
-                    "Yellow"
+                    "White"
                 ],
                 sizes: [
                     "S","M","L","XL"
@@ -33,10 +38,10 @@ class App extends Component {
                     "Classic"
                 ],
                 images: [
-                    "https://source.unsplash.com/collection/219941/900x1200",
-                    "https://source.unsplash.com/collection/9454911/900x1200",
-                    "https://source.unsplash.com/collection/1198107/900x1200",
-                    "https://source.unsplash.com/collection/762960/900x1200",
+                    image1,
+                    image2,
+                    image3,
+                    image4,
                 ],
                 productDesc: "platea dictumst vestibulum rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus at augue eget arcu dictum varius duis at consectetur lorem donec massa sapien faucibus et molestie ac feugiat sed lectus vestibulum mattis ullamcorper velit sed ullamcorper morbi tincidunt ornare massa eget egestas purus viverra accumsan in\n"
             },
@@ -44,20 +49,6 @@ class App extends Component {
 
         }
     }
-
-    // componentDidMount() {
-    //     this.setState(
-    //         (prevState)=>{
-    //             const arr = [];
-    //             arr.push({
-
-    //             })
-    //             return {
-    //                 cart: arr,
-    //             }
-    //         }
-    //     )
-    // }
 
     incCartItem = (id) => {
 
